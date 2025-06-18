@@ -18,7 +18,7 @@ It features static email-password login and an admin dashboard with task assignm
 
 - **Frontend:** React, Tailwind CSS , Scrolltrigger(Add scrolling)
 - **Bundler:** Vite  
-- **Language:** JavaScript (ES6+)  
+- **Language:** JavaScript (ES6+)
 
 ---
 
@@ -47,8 +47,8 @@ EMS/
 - **Email:** `admin@example.com`  
 - **Password:** `admin123`
 #### For Employee
-- **Email:** ``  
-- **Password:** ``  
+- **Email:** `employee4@example.com`  
+- **Password:** `123`  
 
 ---
 
@@ -68,8 +68,8 @@ npm run build
 ```
 ---
 ### 🌐 Live Demo
-[🔗 View Live Project](https://your-live-site.vercel.app)
-[📁 View on GitHub](https://github.com/Musa-Qureshi-01/Employee-Management-System..git)
+- [🔗 View Live Project](https://your-live-site.vercel.app)
+- [📁 View on GitHub](https://github.com/Musa-Qureshi-01/Employee-Management-System..git)
 
 ### 📄 License
 This project is open-source and available under the MIT License.
