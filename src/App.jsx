@@ -2,19 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import Login from './components/Auth/Login';
 import EmployeeDashboard from './components/Dashboard/EmployeeDashboard';
 import AdminDashboard from './components/Dashboard/AdminDashboard';
-import { getLocalStoarge, setLocalStoarge } from './utils/localStorage';
+import { setLocalStoarge } from './utils/localStorage';
 import { AuthContext } from './context/AuthProvider';
 
 const App = () => {
   const [user, setUser] = useState(null);
   const [loggedInUserData, setLoggedInUserData] = useState(null);
-  const [userData, setUserData] = useContext(AuthContext);
+  const [userData] = useContext(AuthContext); // destructure employee array only
 
   useEffect(() => {
-    const { employees } = getLocalStoarge();
-    if (!employees || employees.length === 0) {
-      setLocalStoarge(); // only set if not already present
-    }
+    setLocalStoarge();
 
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
@@ -24,20 +21,24 @@ const App = () => {
         setLoggedInUserData(parsedUser.data);
       }
     }
-  }, []);
+  }, [userData]); // wait for userData to be ready
+  // ↑ This ensures that if login depends on userData, it's available.
 
   const handleLogin = (email, password) => {
-    if (email === 'admin@me.com' && password === '123') {
+    if (email === 'admin@example.com' && password === 'admin123') {
       setUser('admin');
       localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin' }));
-    } else if (userData && Array.isArray(userData.employees)) {
-      const employee = userData.employees.find(
+    } else if (userData && Array.isArray(userData)) {
+      const employee = userData.find(
         (e) => email === e.email && password === e.password
       );
       if (employee) {
         setUser('employee');
         setLoggedInUserData(employee);
-        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'employee', data: employee }));
+        localStorage.setItem(
+          'loggedInUser',
+          JSON.stringify({ role: 'employee', data: employee })
+        );
       } else {
         alert('Invalid Credentials');
       }
