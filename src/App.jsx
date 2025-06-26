@@ -11,11 +11,13 @@ const App = () => {
   const [userData, setUserData] = useContext(AuthContext);
 
   useEffect(() => {
-    setLocalStoarge(); // initialize localStorage with data if not already present
+    const { employees } = getLocalStoarge();
+    if (!employees || employees.length === 0) {
+      setLocalStoarge(); // only set if not already present
+    }
 
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
-      console.log('User is LoggedIn');
       const parsedUser = JSON.parse(loggedInUser);
       setUser(parsedUser.role);
       if (parsedUser.data) {
@@ -28,8 +30,10 @@ const App = () => {
     if (email === 'admin@me.com' && password === '123') {
       setUser('admin');
       localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin' }));
-    } else if (userData && Array.isArray(userData)) {
-      const employee = userData.find((e) => email === e.email && password === e.password);
+    } else if (userData && Array.isArray(userData.employees)) {
+      const employee = userData.employees.find(
+        (e) => email === e.email && password === e.password
+      );
       if (employee) {
         setUser('employee');
         setLoggedInUserData(employee);
