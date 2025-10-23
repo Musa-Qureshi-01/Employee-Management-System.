@@ -1,4 +1,4 @@
-# 🧑‍💼 Employee Management System (EMS)
+# Employee Management System (EMS)
 
 A simple and modern **Employee Management System** built using **React** and **Tailwind CSS**.  
 It features static email-password login and an admin dashboard with task assignment functionality — all with a sleek and minimal UI.
